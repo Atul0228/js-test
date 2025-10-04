@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculate Table</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    input, button { margin: 5px; }
+    table { margin-top: 20px; border-collapse: collapse; }
+    td, th { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <h1>Multiplication Table Generator</h1>
+  <input type="text" id="numInput" placeholder="Enter a number">
+  <button onclick="generateTable()">Generate Table</button>
+  <p id="errorMsg" style="color: red;"></p>
+  <div id="tableContainer"></div>
+
+  <script>
+    function generateTable() {
+      const input = document.getElementById('numInput').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const tableContainer = document.getElementById('tableContainer');
+      tableContainer.innerHTML = '';
+      errorMsg.innerText = '';
+
+      if (!input) {
+        errorMsg.innerText = "Please enter a value.";
+        return;
+      }
+
+      const num = Number(input);
+      if (isNaN(num)) {
+        errorMsg.innerText = "Please enter a valid number.";
+        return;
+      }
+
+      let tableHTML = '<table><tr><th>Multiplier</th><th>Result</th></tr>';
+      for (let i = 1; i <= 10; i++) {
+        tableHTML += `<tr><td>${num} × ${i}</td><td>${num * i}</td></tr>`;
+      }
+      tableHTML += '</table>';
+      tableContainer.innerHTML = tableHTML;
+    }
+  </script>
+
+</body>
+</html>

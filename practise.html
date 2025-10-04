@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Function Page</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    section { margin-bottom: 30px; }
+    input, button { margin: 5px; }
+    iframe { border: none; width: 100%; height: 50px; }
+  </style>
+</head>
+<body>
+
+  <!-- 1) Heading and Current Date/Time -->
+  <section>
+    <h1>Welcome to My Interactive Page</h1>
+    <iframe srcdoc="script=document.write(new Date().toLocaleString());script/>"></iframe>
+  </section>
+
+  <!-- 2) Hyperlink to Calculate.html -->
+  <section>
+    <h2>Table Generator</h2>
+    <a href="Calculate.html">Go to Calculate Page</a>
+  </section>
+
+  <!-- 3) Username Generator -->
+  <section>
+    <h2>Create Username</h2>
+    <input type="text" id="firstName" placeholder="First Name">
+    <input type="text" id="lastName" placeholder="Last Name">
+    <input type="number" id="age" placeholder="Age">
+    <button onclick="generateUsername()">Generate Username</button>
+    <p id="usernameResult"></p>
+  </section>
+
+  <!-- 4) Student Object Manipulation -->
+  <section>
+    <h2>Student Information</h2>
+    <input type="text" id="studFirstName" placeholder="First Name">
+    <input type="text" id="studLastName" placeholder="Last Name">
+    <input type="number" id="studMarks" placeholder="Marks">
+    <button onclick="addStudentData()">Add Student</button>
+    <p id="studentDisplay"></p>
+  </section>
+
+  <script>
+    // Task 3: Username Generator
+    function generateUsername() {
+      const first = document.getElementById('firstName').value.trim().toLowerCase();
+      const last = document.getElementById('lastName').value.trim().toLowerCase();
+      const age = document.getElementById('age').value.trim();
+
+      if (first.length < 2 || last.length < 2 || !age) {
+        document.getElementById('usernameResult').innerText = "Please enter valid inputs.";
+        return;
+      }
+
+      const username = first.slice(0, 2) + last.slice(-2) + age;
+      document.getElementById('usernameResult').innerText = "Generated Username: " + username;
+    }
+
+    // Task 4: Student Object Update
+    const stud = {
+      firstName: "John",
+      lastname: "",
+      marks: 48
+    };
+
+    function addStudentData() {
+      stud.firstName = document.getElementById('studFirstName').value.trim();
+      stud.lastname = document.getElementById('studLastName').value.trim();
+      stud.marks = parseInt(document.getElementById('studMarks').value.trim());
+
+      document.getElementById('studentDisplay').innerText =
+        `Student: ${stud.firstName} ${stud.lastname}, Marks: ${stud.marks}`;
+    }
+  </script>
+
+</body>
+</html>
